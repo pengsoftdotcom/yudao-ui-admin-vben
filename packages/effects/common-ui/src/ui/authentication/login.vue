@@ -14,7 +14,6 @@ import { useVbenForm } from '@vben-core/form-ui';
 import { VbenButton, VbenCheckbox } from '@vben-core/shadcn-ui';
 
 import Title from './auth-title.vue';
-import DocLink from './doc-link.vue';
 import ThirdPartyLogin from './third-party-login.vue';
 
 interface Props extends AuthenticationProps {
@@ -107,7 +106,7 @@ defineExpose({
     <slot name="title">
       <Title>
         <slot name="title">
-          {{ title || `${$t('authentication.welcomeBack')} 👋🏻` }}
+          {{ title || `${$t('authentication.welcomeBack')} ` }}
         </slot>
         <template #desc>
           <span class="text-muted-foreground">
@@ -185,6 +184,7 @@ defineExpose({
       />
     </slot>
 
+    <!--
     <slot name="to-register">
       <div v-if="showRegister" class="mt-3 text-center text-sm">
         {{ $t('authentication.accountTip') }}
@@ -196,8 +196,10 @@ defineExpose({
         </span>
       </div>
     </slot>
+    -->
 
-    <!-- 萌新必读 -->
+    <!-- 萌新必读 
     <DocLink />
+    -->
   </div>
 </template>
