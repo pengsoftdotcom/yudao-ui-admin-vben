@@ -57,7 +57,7 @@ export function useFormSchema(): VbenFormSchema[] {
       rules: 'mobile',
     },
     {
-      label: '用户名称',
+      label: '用户账号',
       fieldName: 'username',
       component: 'Input',
       rules: 'required',

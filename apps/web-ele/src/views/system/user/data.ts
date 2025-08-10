@@ -29,7 +29,7 @@ export function useFormSchema(): VbenFormSchema[] {
     },
     {
       fieldName: 'username',
-      label: '用户名称',
+      label: '用户账号',
       component: 'Input',
       rules: 'required',
     },
@@ -191,7 +191,7 @@ export function useAssignRoleFormSchema(): VbenFormSchema[] {
     },
     {
       fieldName: 'username',
-      label: '用户名称',
+      label: '用户账号',
       component: 'Input',
       componentProps: {
         disabled: true,
@@ -249,10 +249,10 @@ export function useGridFormSchema(): VbenFormSchema[] {
   return [
     {
       fieldName: 'username',
-      label: '用户名称',
+      label: '用户账号',
       component: 'Input',
       componentProps: {
-        placeholder: '请输入用户名称',
+        placeholder: '请输入用户账号',
         allowClear: true,
       },
     },
@@ -296,7 +296,7 @@ export function useGridColumns<T = SystemUserApi.User>(
     },
     {
       field: 'username',
-      title: '用户名称',
+      title: '用户账号',
       minWidth: 120,
     },
     {
