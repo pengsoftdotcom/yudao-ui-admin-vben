@@ -32,7 +32,6 @@ const [FormModal, formModalApi] = useVbenModal({
   connectedComponent: Form,
   destroyOnClose: true,
 });
-
 const [ResetPasswordModal, resetPasswordModalApi] = useVbenModal({
   connectedComponent: ResetPasswordForm,
   destroyOnClose: true,
