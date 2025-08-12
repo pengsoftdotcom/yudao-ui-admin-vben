@@ -10,7 +10,7 @@ import { handleTree } from '@vben/utils';
 import { Checkbox, message } from 'ant-design-vue';
 
 import { useVbenForm } from '#/adapter/form';
-import { getMenuList } from '#/api/system/menu';
+import { getSimpleMenusList } from '#/api/system/menu';
 import {
   createTenantPackage,
   getTenantPackage,
@@ -94,7 +94,7 @@ const [Modal, modalApi] = useVbenModal({
 async function loadMenuTree() {
   menuLoading.value = true;
   try {
-    const data = await getMenuList();
+    const data = await getSimpleMenusList();
     menuTree.value = handleTree(data) as SystemMenuApi.Menu[];
   } finally {
     menuLoading.value = false;
