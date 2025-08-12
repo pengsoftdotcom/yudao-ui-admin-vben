@@ -41,7 +41,7 @@ export function useFormSchema(): VbenFormSchema[] {
           const data = await getMenuList();
           data.unshift({
             id: 0,
-            name: '顶级部门',
+            name: '顶级菜单',
           } as SystemMenuApi.Menu);
           return handleTree(data);
         },
