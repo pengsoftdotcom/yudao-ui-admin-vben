@@ -7,6 +7,7 @@ export namespace SystemUserApi {
   export interface User {
     id?: number;
     username: string;
+    name: string;
     nickname: string;
     deptId: number;
     postIds: string[];

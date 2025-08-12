@@ -16,6 +16,7 @@ export namespace SystemUserProfileApi {
     roles: any[];
     dept: any;
     posts: any[];
+    name: string;
   }
 
   /** 更新密码请求 */
@@ -26,6 +27,7 @@ export namespace SystemUserProfileApi {
 
   /** 更新个人信息请求 */
   export interface UpdateProfileReq {
+    name?: string;
     nickname?: string;
     email?: string;
     mobile?: string;
