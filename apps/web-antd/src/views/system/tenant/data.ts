@@ -1,5 +1,9 @@
 import type { VbenFormSchema } from '#/adapter/form';
 import type { VxeTableGridOptions } from '#/adapter/vxe-table';
+import type { OrgApi } from '#/api/system/org';
+import type { SystemTenantPackageApi } from '#/api/system/tenant-package';
+
+import dayjs from 'dayjs';
 
 import { z } from '#/adapter/form';
 import { getTenantPackageList } from '#/api/system/tenant-package';
@@ -11,7 +15,7 @@ import {
 } from '#/utils';
 
 /** 新增/修改的表单 */
-export function useFormSchema(): VbenFormSchema[] {
+export function useFormSchema(orgList?: OrgApi.Org[]): VbenFormSchema[] {
   return [
     {
       fieldName: 'id',
@@ -20,6 +24,21 @@ export function useFormSchema(): VbenFormSchema[] {
         triggerFields: [''],
         show: () => false,
       },
+    },
+    {
+      fieldName: 'orgId',
+      label: '所属组织',
+      component: 'ApiSelect',
+      componentProps: {
+        // api: () => getOrgListForSaveTenant(1),
+        options: orgList || [],
+        fieldNames: {
+          label: 'name',
+          value: 'id',
+        },
+        placeholder: '请选择所属组织',
+      },
+      rules: 'required',
     },
     {
       fieldName: 'name',
@@ -32,7 +51,14 @@ export function useFormSchema(): VbenFormSchema[] {
       label: '租户套餐',
       component: 'ApiSelect',
       componentProps: {
-        api: () => getTenantPackageList(),
+        api: async () => {
+          const data = await getTenantPackageList();
+          data.unshift({
+            id: 0,
+            name: '系统租户',
+          } as SystemTenantPackageApi.TenantPackage);
+          return data;
+        },
         labelField: 'name',
         valueField: 'id',
         placeholder: '请选择租户套餐',
@@ -52,7 +78,7 @@ export function useFormSchema(): VbenFormSchema[] {
       rules: 'mobile',
     },
     {
-      label: '用户名称',
+      label: '用户账号',
       fieldName: 'username',
       component: 'Input',
       rules: 'required',
@@ -87,12 +113,12 @@ export function useFormSchema(): VbenFormSchema[] {
         placeholder: '请选择过期时间',
       },
       rules: 'required',
+      defaultValue: dayjs('2099-12-31'),
     },
     {
       label: '绑定域名',
       fieldName: 'website',
       component: 'Input',
-      rules: 'required',
     },
     {
       fieldName: 'status',

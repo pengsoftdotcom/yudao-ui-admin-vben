@@ -14,6 +14,7 @@ export namespace SystemTenantApi {
     expireTime: Date;
     website: string;
     status: number;
+    orgId: number;
   }
 }
 
