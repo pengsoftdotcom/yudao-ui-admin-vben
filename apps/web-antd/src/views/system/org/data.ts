@@ -40,6 +40,7 @@ export function useFormSchema(): VbenFormSchema[] {
         treeDefaultExpandAll: true,
       },
       rules: 'selectRequired',
+      defaultValue: 0,
     },
     {
       fieldName: 'name',

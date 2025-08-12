@@ -44,8 +44,9 @@ export function exportOrg(params: any) {
 }
 
 /** 查询组织列表 */
-export function getOrgListForSaveTenant(params: any) {
-  return requestClient.get<OrgApi.Org[]>('/system/org/list-for-save-tenant', {
-    params,
-  });
+export function getOrgListForSaveTenant(tenantId?: number) {
+  const url = '/system/org/list-for-save-tenant';
+  return tenantId === undefined
+    ? requestClient.get<OrgApi.Org[]>(url)
+    : requestClient.get<OrgApi.Org[]>(`${url}?tenantId=${tenantId}`);
 }
