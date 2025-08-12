@@ -1,6 +1,3 @@
-import type { PageParam, PageResult } from '@vben/request';
-import type { Dayjs } from 'dayjs';
-
 import { requestClient } from '#/api/request';
 
 export namespace OrgApi {
@@ -12,7 +9,7 @@ export namespace OrgApi {
     parentId?: number; // 父组织id
     sort?: number; // 显示顺序
     status?: number; // 组织状态（0正常 1停用）
-  children?: Org[];
+    children?: Org[];
   }
 }
 
@@ -41,8 +38,14 @@ export function deleteOrg(id: number) {
   return requestClient.delete(`/system/org/delete?id=${id}`);
 }
 
-
 /** 导出组织 */
 export function exportOrg(params: any) {
   return requestClient.download('/system/org/export-excel', params);
+}
+
+/** 查询组织列表 */
+export function getOrgListForSaveTenant(params: any) {
+  return requestClient.get<OrgApi.Org[]>('/system/org/list-for-save-tenant', {
+    params,
+  });
 }

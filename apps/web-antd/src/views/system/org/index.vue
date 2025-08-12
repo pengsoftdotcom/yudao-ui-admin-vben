@@ -2,23 +2,23 @@
 import type { VxeTableGridOptions } from '#/adapter/vxe-table';
 import type { OrgApi } from '#/api/system/org';
 
+import { ref } from 'vue';
+
 import { Page, useVbenModal } from '@vben/common-ui';
-import { message,Tabs } from 'ant-design-vue';
-import Form from './modules/form.vue';
+import { downloadFileFromBlobPart } from '@vben/utils';
 
+import { message } from 'ant-design-vue';
 
-import { ref, computed } from 'vue';
-import { $t } from '#/locales';
 import { ACTION_ICON, TableAction, useVbenVxeGrid } from '#/adapter/vxe-table';
-import { getOrgList, deleteOrg, exportOrg } from '#/api/system/org';
-import { downloadFileFromBlobPart, isEmpty } from '@vben/utils';
+import { deleteOrg, exportOrg, getOrgList } from '#/api/system/org';
+import { $t } from '#/locales';
 
 import { useGridColumns, useGridFormSchema } from './data';
-
+import Form from './modules/form.vue';
 
 const [FormModal, formModalApi] = useVbenModal({
   connectedComponent: Form,
-  destroyOnClose: true
+  destroyOnClose: true,
 });
 
 /** 切换树形展开/收缩状态 */
@@ -52,7 +52,7 @@ function handleAppend(row: OrgApi.Org) {
 async function handleDelete(row: OrgApi.Org) {
   const hideLoading = message.loading({
     content: $t('ui.actionMessage.deleting', [row.id]),
-    key: 'action_key_msg'
+    key: 'action_key_msg',
   });
   try {
     await deleteOrg(row.id as number);
@@ -66,7 +66,6 @@ async function handleDelete(row: OrgApi.Org) {
   }
 }
 
-
 /** 导出表格 */
 async function handleExport() {
   const data = await exportOrg(await gridApi.formApi.getValues());
@@ -75,21 +74,21 @@ async function handleExport() {
 
 const [Grid, gridApi] = useVbenVxeGrid({
   formOptions: {
-    schema: useGridFormSchema()
+    schema: useGridFormSchema(),
   },
   gridOptions: {
     columns: useGridColumns(),
     height: 'auto',
-  treeConfig: {
-    parentField: 'parentId',
-    rowField: 'id',
-    transform: true,
-    expandAll: true,
-    reserve: true
-  },
-  pagerConfig: {
-    enabled: false
-  },
+    treeConfig: {
+      parentField: 'parentId',
+      rowField: 'id',
+      transform: true,
+      expandAll: true,
+      reserve: true,
+    },
+    pagerConfig: {
+      enabled: false,
+    },
     proxyConfig: {
       ajax: {
         query: async (_, formValues) => {
@@ -104,10 +103,9 @@ const [Grid, gridApi] = useVbenVxeGrid({
     toolbarConfig: {
       refresh: true,
       search: true,
-    }
+    },
   } as VxeTableGridOptions<OrgApi.Org>,
-  gridEvents:{
-  }
+  gridEvents: {},
 });
 </script>
 
@@ -173,6 +171,5 @@ const [Grid, gridApi] = useVbenVxeGrid({
         />
       </template>
     </Grid>
-
   </Page>
 </template>
