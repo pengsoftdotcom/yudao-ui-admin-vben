@@ -52,15 +52,6 @@ export function useFormSchema(): VbenFormSchema[] {
 export function useGridFormSchema(): VbenFormSchema[] {
   return [
     {
-      fieldName: 'name',
-      label: '楼栋名称',
-      component: 'Input',
-      componentProps: {
-        allowClear: true,
-        placeholder: '请输入楼栋名称',
-      },
-    },
-    {
       fieldName: 'zoneId',
       label: '所属区域',
       component: 'ApiSelect',
@@ -68,6 +59,15 @@ export function useGridFormSchema(): VbenFormSchema[] {
         allowClear: true,
         api: () => getZoneOptions(),
         placeholder: '请选择所属区域',
+      },
+    },
+    {
+      fieldName: 'name',
+      label: '楼栋名称',
+      component: 'Input',
+      componentProps: {
+        allowClear: true,
+        placeholder: '请输入楼栋名称',
       },
     },
   ];

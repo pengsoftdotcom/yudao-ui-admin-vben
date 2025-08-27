@@ -85,6 +85,17 @@ export function useFormSchema(): VbenFormSchema[] {
 export function useGridFormSchema(): VbenFormSchema[] {
   return [
     {
+      fieldName: 'areaId',
+      label: '所属地区',
+      component: 'ApiTreeSelect',
+      componentProps: {
+        allowClear: true,
+        api: () => getAreaTree(),
+        fieldNames: { label: 'name', value: 'id', children: 'children' },
+        placeholder: '请选择所属地区',
+      },
+    },
+    {
       fieldName: 'name',
       label: '区域名称',
       component: 'Input',
@@ -100,15 +111,6 @@ export function useGridFormSchema(): VbenFormSchema[] {
       componentProps: {
         allowClear: true,
         placeholder: '请输入区域简称',
-      },
-    },
-    {
-      fieldName: 'areaId',
-      label: '所属地区',
-      component: 'ApiTreeSelect',
-      componentProps: {
-        api: () => getAreaTree(),
-        fieldNames: { label: 'name', value: 'id', children: 'children' },
       },
     },
   ];
